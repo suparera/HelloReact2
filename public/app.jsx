@@ -1,19 +1,27 @@
-var Greeter = React.createClass({
+let Greeter = React.createClass({
+  getDefaultProps:function(){
+    return {
+      name:'React'
+      ,message:'Default Message from Component'
+    };
+  }
+
   // require function for class
-  render:function(){
+  ,render:function(){
+    let name = this.props.name;
+    let message = this.props.message;
     return (
       /* can return 1 root div */
       <div>
-        <h1>Hi2 World app</h1>
-        <p>This is from the quant</p>
+        <h1>Hi สวัสดี {name}</h1>
+        <p>{message}</p>
       </div>
     );
   }
 });
 
-
+let myMessage = "i will be great again!!!";
 ReactDOM.render(
-  <Greeter/>
+  <Greeter name="Suparerk" message={myMessage} />
   , document.getElementById('app')
 );
-cd
