@@ -17,16 +17,22 @@ let GreeterForm = React.createClass({
     return (
       <form onSubmit={this.formOnSubmit}>
         <input ref="name" type="text"/>
+        <input ref="message" type="text"/>
         <button>Set Name</button>
       </form>
     );
-  }
-  , formOnSubmit:function(e){
+  } ,
+
+  formOnSubmit:function(e){
     e.preventDefault();
     let name = this.refs.name.value;
+    let message = this.refs.message.value;
     if(name.length > 0){
+      let updatedValues = {};
+      updatedValues.name = name;
+      updatedValues.message = message;
       this.refs.name.value = '';
-      this.props.onNewName(name);
+      this.props.onNewName(updatedValues);
     }
   }
 });
@@ -45,16 +51,14 @@ let Greeter = React.createClass({
     }
   }
 
-  ,handleNewName:function(name){
-    this.setState({
-      name:name
-    });
+  ,handleNewName:function(updatedValues){
+    this.setState(updatedValues);
   }
 
   // require function for class
   ,render:function(){
     let name = this.state.name;
-    let message = this.props.message;
+    let message = this.state.message;
     return (
       /* can return 1 root div */
       <div>
